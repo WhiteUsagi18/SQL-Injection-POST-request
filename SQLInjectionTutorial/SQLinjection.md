@@ -9,12 +9,12 @@ Here in LEKIR, we have a challenge that vulnerable to SQL injection. We can mani
 
 ## Identifying Vulnerabilities
 First, we need to identify if this page is vulnerable to sql injeciton.<br><br>
-In this case, we already have the source code. View the source code and search for the line that handle the SQL query. Usually the developer will named the variable with $query or $q.
+In this case, we already have the source code. View the source code and search for the line that handle the SQL query. Usually the developer will named the variable with `$query` or `$q`.
 
 ![image 2](./img/image2.png)
 
 Based on how the code wrote, we know that the page is vulnerable to sql injection.
-Another way to identify is by inserting a special character like ' or " in the input field. Then you will see there is an error respond on the page.
+Another way to identify is by inserting a single quote `'` in the input field. Then you will see there is an error respond on the page.
 
 ![image 3](./img/image3.png)
 
@@ -22,7 +22,7 @@ Another way to identify is by inserting a special character like ' or " in the i
 > There will be some situation that will return the blind error which will not giving us any error respond on the page after you inserted the character. This will make it difficult for us when we want to identify if the page is vulnerable or not.
 
 ## Intercept the POST Request
-Open your burp suite and turn on the intercept in proxy tab. Go back to your target site and enter anything in the input field. After you click on the submit button, burp will catches the **POST request** and waits.
+Open your burp suite and turn on the intercept in proxy tab. Go back to your target site and enter anything in the input field. After you click on the submit button, burp will catch the **POST request** and wait.
 
 ![image 4](./img/image4.png)
 
@@ -43,7 +43,7 @@ nano post-request.txt
 
 ## Implementing SQL Injection
 
-Run sqlmap as shown below; the option `-r` tells sqlmap to read the post-request.txt file to get the information to attack in the POST request. `-p` is the parameter we are attacking. `--dbs` will show the available databases. <br>The parameter that we are attacking is user_id.<br>
+Run sqlmap as shown below; the option `-r` tells sqlmap to read the `post-request.txt` file to get the information to attack in the POST request. `-p` is the parameter we are attacking. `--dbs` will show the databases that are available. <br>The parameter that we are attacking is `user_id`.<br>
 
 `
 sqlmap -r post-request -p user_id --dbs
@@ -62,7 +62,7 @@ sqlmap -r post-request -p user_id -D lekir --tables
 
 ![image 7](./img/image7.png)
 
-The secret table looks suspicious. let's take a look inside it.
+The `secret` table looks suspicious. let's take a look inside it.
 
 `
 sqlmap -r post-request -p user_id -D lekir -T secret --columns
@@ -90,4 +90,4 @@ We now know the text was encrypted using base64. Go to any online base64 decoder
 
 ![image 11](./img/image11.png)
 
-YAY! we know can read the text.
+YAY! Now we can read the text.
