@@ -3,6 +3,10 @@ Here in LEKIR, we have a challenge that vulnerable to SQL injection. We can mani
 
 ![image 1](./img/image1.png)
 
+## Tools
+- Burp Suite
+- SqlMap
+
 ## Identifying Vulnerabilities
 First, we need to identify if this page is vulnerable to sql injeciton.<br><br>
 In this case, we already have the source code. View the source code and search for the line that handle the SQL query. Usually the developer will named the variable with $query or $q.
@@ -16,3 +20,6 @@ Another way to identify is by inserting a special character like ' or " in the i
 
 > [!NOTE]
 > There will be some situation that will return the blind error which will not giving us any error respond on the page after you inserted the character. This will make it difficult for us when we want to identify if the page is vulnerable or not.
+
+## Implementing SQL injection
+Open your burp suite and turn on the intercept in proxy tab. Go back to your target site and enter anything in the input field. After you click on the submit button, burp suite will automatically appear.
