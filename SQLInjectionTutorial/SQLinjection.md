@@ -51,3 +51,10 @@ sqlmap -r post-request -p user_id --dbs
 
 ![image 5](./img/image5.png)
 
+![image 6](./img/image6.png)
+
+I can see that there is a database named lekir which refers to my target site. So now, I want to look for the tables that avaible in this database. Since we know the name of the db, we can use this option `-D` follow by the name of the db to select the db. `--tables` is to show the tables that are avaible in this db
+<br>
+`
+sqlmap -r post-request -p user_id -D lekir --tables
+`
