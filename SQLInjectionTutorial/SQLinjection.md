@@ -14,7 +14,7 @@ In this case, we already have the source code. View the source code and search f
 ![image 2](./img/image2.png)
 
 Based on how the code wrote, we know that the page is vulnerable to sql injection.
-Another way to identify is by inserting a single quote `'` in the input field. Then you will see there is an error respond on the page.
+Another way to identify is by inserting a special character like single quote `'` in the input field. Then you will see there is an error respond on the page.
 
 ![image 3](./img/image3.png)
 
