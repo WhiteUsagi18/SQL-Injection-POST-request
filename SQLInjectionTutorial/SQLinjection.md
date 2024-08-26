@@ -21,5 +21,31 @@ Another way to identify is by inserting a special character like ' or " in the i
 > [!NOTE]
 > There will be some situation that will return the blind error which will not giving us any error respond on the page after you inserted the character. This will make it difficult for us when we want to identify if the page is vulnerable or not.
 
-## Implementing SQL injection
-Open your burp suite and turn on the intercept in proxy tab. Go back to your target site and enter anything in the input field. After you click on the submit button, burp suite will automatically appear.
+## Intercept the POST request
+Open your burp suite and turn on the intercept in proxy tab. Go back to your target site and enter anything in the input field. After you click on the submit button, burp will catches the **POST request** and waits.
+
+![image 4](./img/image4.png)
+
+Copy the POST request to a text file. Create your text file manually or using the following commands: <br>
+
+Creating the text file<br>
+`
+touch post-request.txt
+`
+
+Open text editor and paste the copy<br>
+`
+nano post-request.txt
+`
+
+> [!NOTE]
+> Don't forget to save before you exit.
+
+## Implementing SQL Injection
+
+Run sqlmap as shown below; the option `-r` tells sqlmap to read the post-request.txt file to get the information to attack in the POST request. `-p` is the parameter we are attacking.<br>The parameter that we are attacking is user_id<br>
+
+`
+sqlmap -r post-request -p user_id
+`
+
