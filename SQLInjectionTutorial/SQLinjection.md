@@ -84,4 +84,10 @@ Oh no! the text was encrypted. But it's okey, we can decrypt this if we know the
 https://www.boxentriq.com/code-breaking/cipher-identifier
 `
 
-We now know the text was encrypted using base64. Go to any online base64 decorder and paste the encrypted file.
+![image 10](./img/image10.png)
+
+We now know the text was encrypted using base64. Go to any online base64 decoder and paste the encrypted file.
+
+![image 11](./img/image11.png)
+
+YAY! we know can read the text.
